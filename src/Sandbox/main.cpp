@@ -1,6 +1,8 @@
 #include <iostream>
 
+#include "torch.h"
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Torch::HelloWorld();
     return 0;
 }
