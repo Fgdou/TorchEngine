@@ -3,8 +3,3 @@
 //
 
 #include "torch.h"
-#include <iostream>
-
-void Torch::HelloWorld(){
-    std::cout << "Hello world" << std::endl;
-}
