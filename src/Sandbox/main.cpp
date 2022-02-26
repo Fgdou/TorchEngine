@@ -4,10 +4,26 @@
 #include "Window/Window.h"
 #include "Buffers/Buffers.h"
 #include "Renderer/Renderer.h"
+#include "Events/Event.h"
+#include "Events/WindowCloseEvent.h"
+#include <functional>
 
+bool close = false;
+
+void eventCallback(Torch::Event& e){
+    LOG_INFO("Event %s", e.toString().c_str());
+
+    Torch::Dispatcher d(e);
+
+    d.dispatch<Torch::WindowCloseEvent>([&](Torch::WindowCloseEvent& e){
+        close = true;
+    });
+}
 
 int main() {
     auto window = Torch::Window::create(500, 600, "OpenGL test");
+
+    window->registerEventCallback(eventCallback);
 
     auto va = Torch::VertexArray::create();
     va->bind();
@@ -37,8 +53,9 @@ int main() {
 
     shader->setUniformFloat3("color", {1.0f, .5f, .3f});
 
-    while(true) {
+    while(!close) {
         Torch::Renderer::getRenderer().drawIndex(*va, *vb, *ib, *shader);
         window->swapBuffers();
+        window->pollEvents();
     }
 }

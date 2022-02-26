@@ -20,6 +20,8 @@ namespace Torch{
         void pollEvents() override;
 
     private:
+        void setCallbacks();
+
         GLFWwindow* window;
     };
 }

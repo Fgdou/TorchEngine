@@ -12,15 +12,15 @@ namespace Torch{
         : height(height), width(width)
     {}
 
-    int Window::getHeight() {
+    int Window::getHeight() const {
         return height;
     }
 
-    int Window::getWidth() {
+    int Window::getWidth() const {
         return width;
     }
 
-    float Window::getRatio() {
+    float Window::getRatio() const {
         return (float)width/(float)height;
     }
 
@@ -30,5 +30,13 @@ namespace Torch{
             return std::make_shared<OpenGLWindow>(height, width, name);
         }
         ASSERT(false, "env not found");
+    }
+
+    void Window::registerEventCallback(const std::function<void(Event &)>& f) {
+        callback = f;
+    }
+
+    void Window::sendEvent(Event &e) {
+        callback(e);
     }
 }

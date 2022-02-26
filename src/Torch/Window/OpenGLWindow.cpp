@@ -2,8 +2,12 @@
 // Created by fgdou on 2/26/22.
 //
 
+#include "gl.h"
 #include "OpenGLWindow.h"
 #include "Context/Context.h"
+#include "Events/WindowCloseEvent.h"
+#include "Events/WindowResizeEvent.h"
+
 
 namespace Torch{
 
@@ -25,9 +29,15 @@ namespace Torch{
 
         glfwMakeContextCurrent(window);
 
+        glfwSetWindowUserPointer(window, this);
+
         setVSync(true);
 
         Context::create();
+
+        glViewport(0, 0, width, height);
+
+        setCallbacks();
     }
 
     OpenGLWindow::~OpenGLWindow() {
@@ -46,6 +56,20 @@ namespace Torch{
 
     void OpenGLWindow::pollEvents() {
         glfwPollEvents();
+    }
+
+    void OpenGLWindow::setCallbacks() {
+        glfwSetWindowCloseCallback(window, [](GLFWwindow* w){
+            auto win = static_cast<Window*>(glfwGetWindowUserPointer(w));
+            auto e = std::make_unique<WindowCloseEvent>();
+            win->sendEvent(*e);
+        });
+        glfwSetWindowSizeCallback(window, [](GLFWwindow* w, int width, int height){
+            auto win = static_cast<Window*>(glfwGetWindowUserPointer(w));
+            auto e = std::make_unique<WindowResizeEvent>(height, width);
+            glViewport(0, 0, width, height);
+            win->sendEvent(*e);
+        });
     }
 }
 

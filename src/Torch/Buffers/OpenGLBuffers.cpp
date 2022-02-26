@@ -95,7 +95,7 @@ namespace Torch{
 
     OpenGLIndexBuffer::~OpenGLIndexBuffer() {
         GL_CALL(glDeleteBuffers(1, &handle));
-        LOG_INFO("Destroy vertex buffer");
+        LOG_INFO("Destroy index buffer");
     }
 
     void OpenGLIndexBuffer::bind() const {
