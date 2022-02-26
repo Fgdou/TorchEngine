@@ -30,12 +30,15 @@ int main() {
     std::vector<uint32_t> index{
             0, 1, 2
     };
-
     vb->setData(pos);
     ib->setData(index);
 
+    auto shader = Torch::Shader::create("../shaders/simple.vert", "../shaders/simple.frag");
+
+    shader->setUniformFloat3("color", {1.0f, .5f, .3f});
+
     while(true) {
-        Torch::Renderer::getRenderer().drawIndex(*va, *vb, *ib);
+        Torch::Renderer::getRenderer().drawIndex(*va, *vb, *ib, *shader);
         window->swapBuffers();
     }
 }

@@ -14,7 +14,7 @@ namespace Torch{
         OpenGLRenderer() = default;
         ~OpenGLRenderer() override = default;
 
-        void drawIndex(VertexArray &va, VertexBuffer &vb, IndexBuffer &ib) override;
+        void drawIndex(VertexArray &va, VertexBuffer &vb, IndexBuffer &ib, Shader& shader) override;
     };
 }
 

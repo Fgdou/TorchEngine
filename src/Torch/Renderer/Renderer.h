@@ -7,6 +7,7 @@
 
 #include "torch.h"
 #include "Buffers/Buffers.h"
+#include "Shaders/Shader.h"
 
 namespace Torch{
     class Renderer {
@@ -17,7 +18,7 @@ namespace Torch{
         static Renderer& getRenderer();
         static void createRenderer();
 
-        virtual void drawIndex(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib) = 0;
+        virtual void drawIndex(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, Shader& shader) = 0;
     };
 }
 
