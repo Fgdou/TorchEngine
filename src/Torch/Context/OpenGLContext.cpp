@@ -18,5 +18,8 @@ namespace Torch{
         auto res = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
         ASSERT(res == GL_TRUE, "failed to create opengl context");
         openglInited = true;
+
+        auto version = glGetString(GL_VERSION);
+        LOG_INFO("OpenGL version %s", version);
     }
 }
