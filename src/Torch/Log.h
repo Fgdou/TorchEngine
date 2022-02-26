@@ -11,21 +11,21 @@ namespace Torch{
     class Log{
     public:
 
-        #define LOG_INFO(...)\
+        #define LOG_INFO(...){\
                     char buff[100];\
                     sprintf(buff, __VA_ARGS__);\
-                    Torch::Log::log(buff, __FILE__, __LINE__, Torch::Log::STATE::INFO);
+                    Torch::Log::log(buff, __FILE__, __LINE__, Torch::Log::STATE::INFO);}
 
-        #define LOG_WARN(...)\
+        #define LOG_WARN(...){\
                     char buff[100];\
                     sprintf(buff, __VA_ARGS__);\
-                    log(buff, __FILE__, __LINE__, Torch::Log::STATE::WARN);
+                    Torch::Log::log(buff, __FILE__, __LINE__, Torch::Log::STATE::WARN);}
 
 
-        #define LOG_ERROR(...)\
+        #define LOG_ERROR(...){\
                     char buff[100];\
                     sprintf(buff, __VA_ARGS__);\
-                    log(buff, __FILE__, __LINE__, Torch::Log::STATE::ERROR);\
+                    Torch::Log::log(buff, __FILE__, __LINE__, Torch::Log::STATE::ERROR);}
 
         enum STATE{
             INFO = 2,
