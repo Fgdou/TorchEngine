@@ -4,4 +4,6 @@
 #ifndef TORCH_H
 #define TORCH_H
 
+#include "Log.h"
+
 #endif

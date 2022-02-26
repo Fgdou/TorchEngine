@@ -3,5 +3,6 @@
 #include "torch.h"
 
 int main() {
-    return 0;
+    Torch::Log::setLogState(Torch::Log::INFO);
+    LOG_INFO("Hello world %d", 10);
 }
